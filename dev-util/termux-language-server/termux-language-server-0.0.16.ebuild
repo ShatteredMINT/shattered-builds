@@ -5,22 +5,34 @@
 
 EAPI=8
 
+DESCRIPTION="Termux language server (for ebuilds)"
+
+
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} pypy3 )
 
 inherit distutils-r1
 
-DESCRIPTION="Termux language server (for ebuilds)"
-
-HOMEPAGE="https://github.com/termux/termux-language-server"
 SRC_URI="https://github.com/termux/termux-language-server/releases/download/${PV}/${P}.tar.gz"
+HOMEPAGE="https://github.com/termux/termux-language-server"
+
+KEYWORDS="~amd64"
+SLOT="0"
 
 LICENSE="GPL-3"
-SLOT="0"
-KEYWORDS="~amd64"
+
+RDEPEND="
+	dev-python/lsprotocol
+	dev-python/attrs
+	dev-python/pygls
+	dev-python/cattrs
+	dev-python/tree-sitter-languages
+	dev-python/tree-sitter-lsp
+"
 
 # Upstream does not provide documentation for tests
 RESTRICT="test"
+
 
 pkg_postinst() {
 	ewarn ""
